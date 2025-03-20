@@ -49,7 +49,7 @@ export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" id="pricing" >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1]" />
