@@ -68,8 +68,8 @@ export function LoginForm() {
     <div className="w-full space-y-6 sm:space-y-8">
       {/* Background gradient effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-3xl opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-primary/5 blur-2xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent dark:from-primary/20 dark:via-primary/5 dark:to-transparent blur-3xl opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-primary/5 dark:from-primary/10 dark:via-transparent dark:to-primary/5 blur-2xl" />
       </div>
 
       <motion.div 
@@ -78,10 +78,10 @@ export function LoginForm() {
         transition={{ duration: 0.5 }}
         className="relative space-y-2 sm:space-y-4"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground dark:bg-gradient-to-br dark:from-foreground dark:to-foreground/80 dark:bg-clip-text dark:text-transparent text-center">
           Welcome back
         </h1>
-        <p className="text-sm sm:text-base md:text-lg text-muted-foreground/80 text-center max-w-[90%] mx-auto">
+        <p className="text-sm sm:text-base md:text-lg text-muted-foreground text-center max-w-[90%] mx-auto">
           Enter your credentials to sign in
         </p>
       </motion.div>
@@ -99,13 +99,13 @@ export function LoginForm() {
             name="email"
             render={({ field }: { field: ControllerRenderProps<LoginFormValues, 'email'> }) => (
               <FormItem className="space-y-1 sm:space-y-2">
-                <FormLabel className="text-sm sm:text-base text-foreground/90">Email</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-foreground">Email</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="name@example.com"
                     type="email"
                     disabled={isLoading}
-                    className="h-10 sm:h-12 text-sm sm:text-base bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 focus:ring-primary/20"
+                    className="h-10 sm:h-12 text-sm sm:text-base bg-background dark:bg-background/50 backdrop-blur-sm border-input hover:border-primary/50 focus:border-primary dark:border-primary/20 dark:focus:border-primary/40 focus:ring-primary/20"
                     {...field}
                   />
                 </FormControl>
@@ -119,13 +119,13 @@ export function LoginForm() {
             name="password"
             render={({ field }: { field: ControllerRenderProps<LoginFormValues, 'password'> }) => (
               <FormItem className="space-y-1 sm:space-y-2">
-                <FormLabel className="text-sm sm:text-base text-foreground/90">Password</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-foreground">Password</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter your password"
                     type="password"
                     disabled={isLoading}
-                    className="h-10 sm:h-12 text-sm sm:text-base bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 focus:ring-primary/20"
+                    className="h-10 sm:h-12 text-sm sm:text-base bg-background dark:bg-background/50 backdrop-blur-sm border-input hover:border-primary/50 focus:border-primary dark:border-primary/20 dark:focus:border-primary/40 focus:ring-primary/20"
                     {...field}
                   />
                 </FormControl>
@@ -144,7 +144,7 @@ export function LoginForm() {
           </div>
 
           <Button 
-            className="w-full h-10 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-primary via-primary to-primary-foreground shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300" 
+            className="w-full h-10 sm:h-12 text-sm sm:text-base bg-primary hover:bg-primary/90 dark:bg-gradient-to-r dark:from-primary dark:via-primary dark:to-primary-foreground shadow-lg shadow-primary/10 dark:shadow-primary/20 hover:shadow-xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300" 
             type="submit" 
             disabled={isLoading}
           >
@@ -158,7 +158,7 @@ export function LoginForm() {
             )}
           </Button>
 
-          <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground/80">
+          <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground">
             Don't have an account?{' '}
             <Link
               href="/auth/signup"

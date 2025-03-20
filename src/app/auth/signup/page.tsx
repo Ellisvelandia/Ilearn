@@ -19,10 +19,10 @@ export default async function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-background">
       <div className="relative min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         {/* Left side - Hidden on mobile/tablet, visible on desktop */}
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex">
+        <div className="relative hidden h-full flex-col bg-muted/40 dark:bg-muted p-10 text-foreground dark:text-white lg:flex">
           <div className="relative z-20 flex items-center text-lg font-medium">
             <Link href="/" className="flex items-center space-x-2">
               <span className="bg-gradient-to-r from-primary via-primary to-primary-foreground bg-clip-text text-transparent text-xl font-bold">
@@ -40,7 +40,7 @@ export default async function SignUpPage() {
         </div>
 
         {/* Right side - Form container */}
-        <div className="p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center">
+        <div className="p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center bg-background dark:bg-transparent">
           {/* Mobile/Tablet Logo - Hidden on desktop */}
           <div className="absolute top-8 inset-x-0 flex justify-center lg:hidden">
             <Link href="/" className="flex items-center space-x-2">
