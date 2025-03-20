@@ -35,7 +35,7 @@ const bentoFeatures: BentoFeature[] = [
 const BentoGrid = ({ features }: { features: BentoFeature[] }) => (
   <div className="relative z-20 py-10 lg:py-20 max-w-7xl mx-auto">
     <div className="relative">
-      <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 mt-12 xl:border rounded-md dark:border-neutral-800">
+      <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 xl:border rounded-md dark:border-neutral-800">
         {features.map((feature) => (
           <FeatureCard key={feature.title} className={feature.className}>
             <FeatureTitle>{feature.title}</FeatureTitle>
