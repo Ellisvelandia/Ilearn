@@ -1,0 +1,263 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Responsive Design Guidelines
+Core Responsive Design Principles
+
+### Breakpoint System
+```typescript
+const breakpoints = {
+  'xs': '320px',  // Small phones
+  'sm': '640px',  // Mobile landscape
+  'md': '768px',  // Tablets
+  'lg': '1024px', // Laptops
+  'xl': '1280px', // Desktops
+  '2xl': '1536px' // Large screens
+}
+```
+
+### Mobile-First Implementation
+- Start with smallest viewport design
+- Progressive enhancement using Tailwind modifiers
+- Maintain content hierarchy across breakpoints
+
+Example:
+```html
+<div class="
+  grid
+  grid-cols-1          /* Mobile: Single column */
+  sm:grid-cols-2      /* Tablet: Two columns */
+  lg:grid-cols-3      /* Desktop: Three columns */
+  gap-4               /* Consistent spacing */
+  p-4 sm:p-6 lg:p-8  /* Responsive padding */
+">
+```
+
+## 🎨 Layout Patterns
+
+### Flexible Grids
+```html
+<!-- Responsive Grid Layout -->
+<div class="
+  grid
+  grid-cols-1
+  sm:grid-cols-2
+  lg:grid-cols-4
+  gap-4
+">
+  <div class="aspect-square bg-gray-100"></div>
+  <!-- Repeat for other grid items -->
+</div>
+```
+
+### Responsive Typography
+```html
+<!-- Responsive Text Sizing -->
+<h1 class="
+  text-2xl        /* Mobile base size */
+  sm:text-3xl     /* Tablet size */
+  lg:text-4xl     /* Desktop size */
+  font-bold
+  leading-tight
+">
+```
+
+### Flexible Images
+```html
+<!-- Responsive Image -->
+<div class="
+  aspect-video    /* Maintain aspect ratio */
+  w-full
+  overflow-hidden
+">
+  <img 
+    class="w-full h-full object-cover"
+    src="/image.jpg"
+    alt="Description"
+    loading="lazy"
+  />
+</div>
+```
+
+## 📐 Component Architecture
+
+### Card Components
+```html
+<div class="
+  flex
+  flex-col
+  p-4 sm:p-6
+  gap-4
+  rounded-lg
+  shadow-sm
+  hover:shadow-md
+  transition-shadow
+  bg-white
+">
+  <h3 class="text-lg sm:text-xl font-semibold">Title</h3>
+  <p class="text-sm sm:text-base">Content</p>
+</div>
+```
+
+### Navigation Patterns
+```html
+<!-- Responsive Navigation -->
+<nav class="
+  fixed top-0 w-full
+  bg-white
+  shadow-sm
+">
+  <!-- Mobile Menu Button -->
+  <button class="block lg:hidden p-4">
+    <span class="sr-only">Open menu</span>
+    <!-- Menu icon -->
+  </button>
+  
+  <!-- Desktop Navigation -->
+  <div class="
+    hidden
+    lg:flex
+    items-center
+    gap-6
+    p-4
+  ">
+    <!-- Nav items -->
+  </div>
+</nav>
+```
+
+## 🎯 Best Practices
+
+### Container Patterns
+```html
+<!-- Responsive Container -->
+<div class="
+  mx-auto
+  w-full
+  max-w-7xl
+  px-4 sm:px-6 lg:px-8
+">
+  <!-- Content -->
+</div>
+```
+
+### Form Elements
+```html
+<!-- Responsive Form -->
+<form class="
+  space-y-4
+  w-full
+  max-w-md
+  mx-auto
+  p-4 sm:p-6
+">
+  <input 
+    class="
+      w-full
+      p-2 sm:p-3
+      text-base sm:text-lg
+      rounded-lg
+      border border-gray-300
+      focus:ring-2 focus:ring-blue-500
+    "
+    type="text"
+  />
+</form>
+```
+
+## 🔍 Testing Requirements
+
+### Viewport Testing
+- Test on actual devices when possible
+- Use Chrome DevTools device emulation
+- Verify common breakpoints:
+  - 320px (Small mobile)
+  - 375px (Modern mobile)
+  - 768px (Tablet)
+  - 1024px (Laptop)
+  - 1440px (Desktop)
+
+### Interactive Elements
+- Minimum touch target size: 44x44px
+- Clear hover/focus states
+- Adequate spacing between clickable elements
+
+## 📱 Device-Specific Considerations
+
+### Mobile Optimization
+- Optimize tap targets
+- Implement touch-friendly interfaces
+- Consider thumb zones for navigation
+- Use appropriate font sizes (minimum 16px)
+
+### Tablet Considerations
+- Optimize for both portrait and landscape
+- Consider split-screen usage
+- Implement appropriate padding/margins
+
+### Desktop Enhancements
+- Utilize hover states
+- Implement more complex layouts
+- Consider widescreen optimizations
+
+## 🎨 Visual Hierarchy
+
+### Spacing Scale
+```typescript
+const spacing = {
+  '0': '0',
+  '1': '0.25rem',
+  '2': '0.5rem',
+  '3': '0.75rem',
+  '4': '1rem',
+  '6': '1.5rem',
+  '8': '2rem',
+  '12': '3rem',
+  '16': '4rem',
+}
+```
+
+### Typography Scale
+```typescript
+const typography = {
+  xs: ['0.75rem', '1rem'],     // 12px
+  sm: ['0.875rem', '1.25rem'], // 14px
+  base: ['1rem', '1.5rem'],    // 16px
+  lg: ['1.125rem', '1.75rem'], // 18px
+  xl: ['1.25rem', '1.75rem'],  // 20px
+  '2xl': ['1.5rem', '2rem'],   // 24px
+  '3xl': ['1.875rem', '2.25rem'], // 30px
+}
+```
+
+## 🔧 Performance Considerations
+
+### Image Optimization
+- Use responsive images with srcset
+- Implement lazy loading
+- Optimize image formats (WebP)
+- Consider art direction with picture element
+
+### CSS Best Practices
+- Minimize CSS bundle size
+- Use CSS containment where appropriate
+- Implement will-change for animations
+- Avoid layout thrashing
+
+## 📝 Documentation Requirements
+
+### Component Documentation
+- Document responsive behavior
+- Include breakpoint examples
+- Provide usage guidelines
+- List known limitations
+
+### Maintenance Guidelines
+- Regular responsive testing
+- Performance monitoring
+- Accessibility verification
+- Browser compatibility checks
+
+This enhanced version provides more concrete examples, specific patterns, and detailed guidelines for implementing responsive design across different device sizes and contexts.
