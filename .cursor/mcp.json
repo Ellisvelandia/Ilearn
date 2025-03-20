@@ -1,8 +1,0 @@
-{
-    "mcpServers": {
-      "sketchfab": {
-        "command": "node",
-        "args": ["C:/Users/js/Desktop/youlearn/sketchfab-mcp-server/build/index.js", "--api-key", "5bba88e592194c8db1304901b8000b35"]
-      }
-    }
-  }
