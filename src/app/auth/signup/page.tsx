@@ -6,8 +6,8 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sign Up | YouLearn",
-  description: "Create your YouLearn account",
+  title: "Sign Up | iLearnAI",
+  description: "Create your iLearnAI account",
 };
 
 export default async function SignUpPage() {
@@ -44,14 +44,14 @@ export default async function SignUpPage() {
           <div className="relative z-20 flex items-center text-lg font-medium">
             <Link href="/" className="flex items-center space-x-2">
               <span className="bg-gradient-to-r from-primary via-primary to-primary-foreground bg-clip-text text-transparent text-xl font-bold">
-                YouLearn
+                iLearnAI
               </span>
             </Link>
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;Join YouLearn today and unlock a world of personalized learning with AI-powered tools and expert guidance.&rdquo;
+                &ldquo;Join iLearnAI today and unlock a world of personalized learning with AI-powered tools and expert guidance.&rdquo;
               </p>
             </blockquote>
           </div>
@@ -63,7 +63,7 @@ export default async function SignUpPage() {
           <div className="absolute top-8 inset-x-0 flex justify-center lg:hidden">
             <Link href="/" className="flex items-center space-x-2">
               <span className="bg-gradient-to-r from-primary via-primary to-primary-foreground bg-clip-text text-transparent text-xl font-bold">
-                YouLearn
+                iLearnAI
               </span>
             </Link>
           </div>

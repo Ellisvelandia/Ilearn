@@ -64,7 +64,7 @@ export function Nav() {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-primary/20 blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
             <span className="relative font-bold text-lg sm:text-xl lg:text-2xl bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent transition-all duration-300 ease-out">
-              YouLearn
+              iLearnAI
             </span>
           </div>
         </Link>

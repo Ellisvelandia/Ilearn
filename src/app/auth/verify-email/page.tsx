@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Verify Email | YouLearn",
+  title: "Verify Email | iLearnAI",
   description: "Verify your email address",
 };
 

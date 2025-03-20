@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/context/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "YouLearn - Learn at your own pace",
-  description: "A modern learning platform for everyone",
+  title: "iLearnAI - Learn at your own pace",
+  description: "A modern AI-powered learning platform for everyone",
 };
 
 export default function RootLayout({

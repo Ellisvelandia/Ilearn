@@ -96,7 +96,7 @@ export const Footer = () => {
         {/* Copyright with improved responsive text */}
         <div className="text-center px-4">
           <p className="text-xs sm:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} YouLearn AI. All rights reserved.
+            © {new Date().getFullYear()} iLearnAI. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground/60 mt-1">
             Democratizing high quality education worldwide
