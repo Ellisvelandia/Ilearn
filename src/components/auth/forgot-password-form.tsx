@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Icons } from "@/components/ui/icons";
 
 export function ForgotPasswordForm() {
@@ -49,23 +49,29 @@ export function ForgotPasswordForm() {
   }
 
   return (
-    <Card className="w-full bg-white shadow-sm border-0 sm:border sm:border-gray-100">
+    <Card className="w-[95%] min-w-[300px] mx-auto overflow-hidden bg-[#0F0F0F]/80 border-[#1A1A1A]/20 sm:w-[440px] lg:w-full">
+      <CardHeader className="space-y-2.5 pb-3 px-5 sm:px-6 pt-6">
+        <CardTitle className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-300 text-center">Forgot Password</CardTitle>
+        <CardDescription className="text-gray-100 text-center text-sm sm:text-base">
+          Enter your email and we'll send you a reset link
+        </CardDescription>
+      </CardHeader>
       <form onSubmit={onSubmit}>
-        <CardContent className="space-y-4 p-4">
+        <CardContent className="space-y-5 px-5 sm:px-6 pt-4">
           {error && (
-            <Alert variant="destructive" className="border-red-200 bg-red-50">
-              <AlertDescription className="text-sm text-red-700">{error}</AlertDescription>
+            <Alert variant="destructive" className="bg-red-950/20 border-red-950/10 rounded-lg">
+              <AlertDescription className="text-xs sm:text-sm text-red-400/90">{error}</AlertDescription>
             </Alert>
           )}
           {success && (
-            <Alert className="border-green-200 bg-green-50">
-              <AlertDescription className="text-sm text-green-700">
+            <Alert className="bg-emerald-950/20 border-emerald-950/10 rounded-lg">
+              <AlertDescription className="text-xs sm:text-sm text-emerald-400/90">
                 Check your email for a link to reset your password. If it doesn&apos;t appear within a few minutes, check your spam folder.
               </AlertDescription>
             </Alert>
           )}
-          <div className="space-y-1">
-            <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-xs sm:text-sm font-normal text-gray-400/80">Email</Label>
             <Input
               id="email"
               name="email"
@@ -73,14 +79,19 @@ export function ForgotPasswordForm() {
               placeholder="name@example.com"
               required
               disabled={isLoading || success}
-              className="h-10 bg-white border-gray-200 focus:border-gray-900 focus:ring-0 text-sm"
+              className="h-12 bg-[#141414]/80 border-0 text-gray-200/90 text-sm rounded-lg
+                placeholder:text-gray-500
+                focus-visible:ring-1 focus-visible:ring-gray-700/30
+                transition-all duration-200 w-full px-4"
+              autoComplete="email"
             />
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-3 p-4 pt-0">
+        <CardFooter className="flex flex-col space-y-4 px-5 sm:px-6 py-6">
           <Button
             type="submit"
-            className="w-full h-10 bg-gray-900 hover:bg-black text-white text-sm font-medium shadow-none"
+            className="w-full h-12 bg-white/95 hover:bg-white text-black/90 text-sm font-medium rounded-lg
+              transition-all duration-200 shadow-sm"
             disabled={isLoading || success}
           >
             {isLoading && (
@@ -88,10 +99,21 @@ export function ForgotPasswordForm() {
             )}
             Send Reset Link
           </Button>
+          
+          <div className="relative w-full my-2">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-gray-700/30"></span>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-[#0F0F0F]/80 px-2 text-gray-500">or</span>
+            </div>
+          </div>
+          
           <Button
-            variant="link"
+            variant="outline"
             type="button"
-            className="w-full text-sm text-gray-600 hover:text-gray-900 font-normal p-0"
+            className="w-full h-12 bg-[#141414]/50 hover:bg-[#1A1A1A]/50 text-white/80 border-0 text-sm rounded-lg
+              transition-all duration-200"
             disabled={isLoading}
             onClick={() => router.push("/auth/login")}
           >
