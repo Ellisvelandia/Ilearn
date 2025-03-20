@@ -49,23 +49,23 @@ export function ForgotPasswordForm() {
   }
 
   return (
-    <Card>
+    <Card className="w-full bg-white shadow-sm border-0 sm:border sm:border-gray-100">
       <form onSubmit={onSubmit}>
-        <CardContent className="space-y-4 pt-6">
+        <CardContent className="space-y-4 p-4">
           {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <AlertDescription className="text-sm text-red-700">{error}</AlertDescription>
             </Alert>
           )}
           {success && (
-            <Alert>
-              <AlertDescription>
+            <Alert className="border-green-200 bg-green-50">
+              <AlertDescription className="text-sm text-green-700">
                 Check your email for a link to reset your password. If it doesn&apos;t appear within a few minutes, check your spam folder.
               </AlertDescription>
             </Alert>
           )}
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+          <div className="space-y-1">
+            <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
             <Input
               id="email"
               name="email"
@@ -73,13 +73,14 @@ export function ForgotPasswordForm() {
               placeholder="name@example.com"
               required
               disabled={isLoading || success}
+              className="h-10 bg-white border-gray-200 focus:border-gray-900 focus:ring-0 text-sm"
             />
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
+        <CardFooter className="flex flex-col space-y-3 p-4 pt-0">
           <Button
             type="submit"
-            className="w-full"
+            className="w-full h-10 bg-gray-900 hover:bg-black text-white text-sm font-medium shadow-none"
             disabled={isLoading || success}
           >
             {isLoading && (
@@ -90,7 +91,7 @@ export function ForgotPasswordForm() {
           <Button
             variant="link"
             type="button"
-            className="w-full"
+            className="w-full text-sm text-gray-600 hover:text-gray-900 font-normal p-0"
             disabled={isLoading}
             onClick={() => router.push("/auth/login")}
           >
