@@ -67,22 +67,22 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Create an Account</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-md mx-auto bg-gradient-to-br from-white to-gray-50/50 shadow-lg border border-gray-100">
+      <CardHeader className="space-y-2 pb-6">
+        <CardTitle className="text-2xl font-semibold tracking-tight text-gray-900">Create an Account</CardTitle>
+        <CardDescription className="text-gray-500">
           Enter your details to create your YouLearn account
         </CardDescription>
       </CardHeader>
       <form onSubmit={onSubmit}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="border-red-200 bg-red-50">
+              <AlertDescription className="text-red-700">{error}</AlertDescription>
             </Alert>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
             <Input
               id="email"
               name="email"
@@ -90,33 +90,36 @@ export function SignUpForm() {
               placeholder="name@example.com"
               required
               disabled={isLoading}
+              className="h-11 bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500/20 transition-colors"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium text-gray-700">Password</Label>
             <Input
               id="password"
               name="password"
               type="password"
               required
               disabled={isLoading}
+              className="h-11 bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500/20 transition-colors"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">Confirm Password</Label>
             <Input
               id="confirmPassword"
               name="confirmPassword"
               type="password"
               required
               disabled={isLoading}
+              className="h-11 bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500/20 transition-colors"
             />
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
+        <CardFooter className="flex flex-col space-y-4 pt-6">
           <Button
             type="submit"
-            className="w-full"
+            className="w-full h-11 bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-900 text-white shadow-sm transition-all duration-200"
             disabled={isLoading}
           >
             {isLoading && (
@@ -127,7 +130,7 @@ export function SignUpForm() {
           <Button
             variant="outline"
             type="button"
-            className="w-full"
+            className="w-full h-11 border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors"
             disabled={isLoading}
             onClick={() => router.push("/auth/login")}
           >
