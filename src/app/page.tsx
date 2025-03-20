@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/landing/hero-section";
 import { Features } from "@/components/landing/features";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Footer } from "@/components/landing/Footer";
+import { Pricing } from "../components/landing/pricing";
 
 export default async function Home() {
   // Check if user is authenticated
@@ -61,6 +62,7 @@ export default async function Home() {
       <div className="flex-1 w-full">
         <HeroSection />
         <Features />
+        <Pricing />
       </div>
 
       {/* Footer */}
