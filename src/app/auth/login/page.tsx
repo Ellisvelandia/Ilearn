@@ -3,6 +3,7 @@ import { LoginForm } from "@/components/auth/login-form";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sign In | YouLearn",
@@ -20,6 +21,23 @@ export default async function LoginPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Back to Home Link - Visible on all screen sizes */}
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-50">
+        <Link 
+          href="/" 
+          className="group flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
+            bg-background/50 dark:bg-muted/30 backdrop-blur-sm
+            border border-border hover:border-primary/50
+            text-muted-foreground hover:text-primary
+            shadow-sm hover:shadow-md hover:shadow-primary/5
+            transition-all duration-300 ease-in-out
+            hover:scale-105 active:scale-95"
+        >
+          <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          Back to Home
+        </Link>
+      </div>
+
       <div className="relative min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         {/* Left side - Hidden on mobile/tablet, visible on desktop */}
         <div className="relative hidden h-full flex-col bg-muted/40 dark:bg-muted p-10 text-foreground dark:text-white lg:flex">
