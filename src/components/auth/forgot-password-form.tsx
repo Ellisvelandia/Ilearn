@@ -7,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Icons } from "@/components/ui/icons";
 
-export function LoginForm() {
+export function ForgotPasswordForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   // Initialize Supabase client
   const supabase = createBrowserClient(
@@ -25,45 +26,42 @@ export function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     setError(null);
+    setSuccess(false);
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
       });
 
       if (error) {
         throw error;
       }
 
-      // Refresh the page to update the session
-      router.refresh();
-      // Redirect to dashboard
-      router.push("/dashboard");
+      setSuccess(true);
     } catch (err: any) {
-      setError(err?.message || "An error occurred during login");
+      setError(err?.message || "An error occurred while sending the reset link");
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>
-          Enter your email and password to access your account
-        </CardDescription>
-      </CardHeader>
+    <Card>
       <form onSubmit={onSubmit}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 pt-6">
           {error && (
             <Alert variant="destructive">
               <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+          {success && (
+            <Alert>
+              <AlertDescription>
+                Check your email for a link to reset your password. If it doesn&apos;t appear within a few minutes, check your spam folder.
+              </AlertDescription>
             </Alert>
           )}
           <div className="space-y-2">
@@ -74,17 +72,7 @@ export function LoginForm() {
               type="email"
               placeholder="name@example.com"
               required
-              disabled={isLoading}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              required
-              disabled={isLoading}
+              disabled={isLoading || success}
             />
           </div>
         </CardContent>
@@ -92,30 +80,21 @@ export function LoginForm() {
           <Button
             type="submit"
             className="w-full"
-            disabled={isLoading}
+            disabled={isLoading || success}
           >
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Sign In
-          </Button>
-          <Button
-            variant="outline"
-            type="button"
-            className="w-full"
-            disabled={isLoading}
-            onClick={() => router.push("/auth/signup")}
-          >
-            Create an account
+            Send Reset Link
           </Button>
           <Button
             variant="link"
             type="button"
             className="w-full"
             disabled={isLoading}
-            onClick={() => router.push("/auth/forgot-password")}
+            onClick={() => router.push("/auth/login")}
           >
-            Forgot your password?
+            Back to Login
           </Button>
         </CardFooter>
       </form>
