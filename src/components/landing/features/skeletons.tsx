@@ -53,8 +53,10 @@ export const SkeletonThree = () => (
 );
 
 export const SkeletonFour = () => (
-  <div className="relative h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] w-full">
-    <Globe />
+  <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] w-full flex items-center justify-center overflow-hidden">
+    <div className="absolute inset-0 flex items-center justify-center">
+      <Globe className="transform translate-y-[20%]" />
+    </div>
   </div>
 );
 

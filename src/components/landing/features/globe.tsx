@@ -13,8 +13,8 @@ export const Globe = ({ className }: SkeletonProps) => {
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 1000 * 2,
-      height: 1000 * 2,
+      width: 350 * 2,
+      height: 350 * 2,
       phi: 0,
       theta: 0.3,
       dark: 1,
@@ -38,15 +38,17 @@ export const Globe = ({ className }: SkeletonProps) => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={className}
-      style={{
-        width: "1000px",
-        height: "1000px",
-        maxWidth: "none",
-        aspectRatio: "1",
-      }}
-    />
+    <div className="relative flex items-center justify-center w-full h-full">
+      <canvas
+        ref={canvasRef}
+        className={`${className} transform scale-75 sm:scale-90 md:scale-100 lg:scale-110`}
+        style={{
+          width: "350px",
+          height: "350px",
+          maxWidth: "none",
+          aspectRatio: "1",
+        }}
+      />
+    </div>
   );
 }; 
