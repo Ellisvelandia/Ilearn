@@ -1,7 +1,22 @@
-import { AuthForm } from '@/components/auth/auth-form'
-import Link from 'next/link'
+import { Metadata } from "next";
+import { SignUpForm } from "@/components/auth/signup-form";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function RegisterPage() {
+export const metadata: Metadata = {
+  title: "Sign Up | YouLearn",
+  description: "Create your YouLearn account",
+};
+
+export default async function SignUpPage() {
+  // Check if user is already logged in
+  const session = await auth();
+  
+  // If logged in, redirect to dashboard
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="container relative min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
@@ -24,26 +39,16 @@ export default function RegisterPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "Join thousands of students who are already learning smarter with YouLearn's AI-powered study tools."
+              &ldquo;Join YouLearn today and unlock a world of personalized learning with AI-powered tools and expert guidance.&rdquo;
             </p>
-            <footer className="text-sm">Michael Chen</footer>
           </blockquote>
         </div>
       </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <AuthForm mode="register" />
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link
-              href="/login"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Sign in
-            </Link>
-          </p>
+          <SignUpForm />
         </div>
       </div>
     </div>
-  )
+  );
 } 

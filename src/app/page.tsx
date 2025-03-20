@@ -25,7 +25,7 @@ export default async function Home() {
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
             <ThemeToggle />
-            <Link href="/login">
+            <Link href="/auth/login" aria-label="Log in to your account">
               <Button 
                 variant="ghost" 
                 size="sm"
@@ -34,7 +34,7 @@ export default async function Home() {
                 Log in
               </Button>
             </Link>
-            <Link href="/signup">
+            <Link href="/auth/signup" aria-label="Create a new account">
               <Button 
                 size="sm"
                 className="text-sm sm:text-base px-3 sm:px-4 whitespace-nowrap"
