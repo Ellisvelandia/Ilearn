@@ -10,48 +10,37 @@ const plans: PricingPlan[] = [
   {
     name: "personal",
     title: "Personal",
-    description: "For individuals who want to explore AI-powered learning at their own pace.",
+    description:
+      "Perfect for individuals who want to explore AI-powered learning at their own pace.",
     price: 0,
-    buttonText: "Try Now",
+    buttonText: "Get Started Free",
     deviceCount: 1,
     features: [
-      "AI-powered study notes",
-      "Basic flashcard generation",
-      "Limited content processing",
-      "Community support"
-    ],
-  },
-  {
-    name: "starter",
-    title: "Starter",
-    description: "Perfect for students and educators looking to enhance their learning experience.",
-    price: 2.99,
-    buttonText: "Subscribe Now",
-    deviceCount: 5,
-    extraMonths: 3,
-    popular: true,
-    features: [
-      "All Personal features",
-      "Advanced AI summaries",
-      "Custom study paths",
-      "Priority support",
-      "Unlimited content processing"
+      "Basic AI study notes",
+      "Limited flashcard generation",
+      "1GB content storage",
+      "Community support",
+      "Basic learning analytics",
     ],
   },
   {
     name: "premium",
     title: "Premium",
-    description: "For institutions and organizations requiring advanced learning tools and analytics.",
-    price: 6.99,
-    buttonText: "Subscribe Now",
-    deviceCount: 10,
+    description:
+      "Unlock the full potential of AI-powered learning with advanced features and unlimited access.",
+    price: 10,
+    buttonText: "Upgrade Now",
+    deviceCount: 5,
     extraMonths: 3,
+    popular: true,
     features: [
-      "All Starter features",
-      "Advanced analytics",
+      "Advanced AI study tools",
+      "Unlimited flashcards",
+      "Unlimited storage",
+      "Priority support 24/7",
+      "Custom study paths",
       "Team collaboration",
-      "Custom integrations",
-      "API access"
+      "Advanced analytics",
     ],
   },
 ];
@@ -64,21 +53,21 @@ export function Pricing() {
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-[1]" />
-      
+
       <div className="container relative py-12 sm:py-16 lg:py-24 space-y-8 sm:space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-b from-foreground to-foreground/80 bg-clip-text text-transparent">
-            Invest in Your Learning Journey
+            Choose Your Learning Journey
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg">
-            Choose the plan that best fits your learning goals. Upgrade or downgrade anytime.
+            Start for free or unlock all features with Premium. No hidden fees.
           </p>
         </div>
 
         {/* Billing Toggle */}
         <div className="flex justify-center items-center gap-4">
-          <span 
+          <span
             className={cn(
               "text-sm sm:text-base transition-colors",
               !isAnnual ? "text-primary font-medium" : "text-muted-foreground"
@@ -98,7 +87,7 @@ export function Pricing() {
               )}
             />
           </button>
-          <span 
+          <span
             className={cn(
               "text-sm sm:text-base transition-colors",
               isAnnual ? "text-primary font-medium" : "text-muted-foreground"
@@ -110,7 +99,7 @@ export function Pricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 pt-8 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 pt-8 px-4 max-w-5xl mx-auto">
           {plans.map((plan) => (
             <motion.div
               key={plan.name}
@@ -123,29 +112,7 @@ export function Pricing() {
             </motion.div>
           ))}
         </div>
-
-        {/* Features Grid */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-          <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">AI-Powered Learning</h3>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Our advanced AI technology adapts to your learning style and creates personalized study materials.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">Learn Anywhere</h3>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Access your study materials on any device, anytime. Perfect for learning on the go.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold">Expert Support</h3>
-            <p className="text-muted-foreground text-sm sm:text-base">
-              Get help when you need it. Our education specialists are here to support your learning journey.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
-} 
+}
