@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import { SignUpForm } from "@/components/auth/signup-form";
+import { SignupForm } from "@/components/auth/signup-form";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sign Up | YouLearn",
@@ -20,9 +21,14 @@ export default async function SignUpPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <div className="relative min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div className="relative hidden h-full flex-col p-10 text-white dark:border-r lg:flex">
+        {/* Left side - Hidden on mobile/tablet, visible on desktop */}
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex">
           <div className="relative z-20 flex items-center text-lg font-medium">
-            YouLearn
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="bg-gradient-to-r from-primary via-primary to-primary-foreground bg-clip-text text-transparent text-xl font-bold">
+                YouLearn
+              </span>
+            </Link>
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
@@ -32,8 +38,22 @@ export default async function SignUpPage() {
             </blockquote>
           </div>
         </div>
-        <div className="w-full px-3 sm:px-6 md:px-8 lg:px-12 flex flex-col justify-center space-y-4 min-w-[320px] max-w-[95%] sm:max-w-[600px] mx-auto lg:max-w-none">
-          <SignUpForm />
+
+        {/* Right side - Form container */}
+        <div className="p-4 sm:p-8 md:p-12 lg:p-16 flex items-center justify-center">
+          {/* Mobile/Tablet Logo - Hidden on desktop */}
+          <div className="absolute top-8 inset-x-0 flex justify-center lg:hidden">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="bg-gradient-to-r from-primary via-primary to-primary-foreground bg-clip-text text-transparent text-xl font-bold">
+                YouLearn
+              </span>
+            </Link>
+          </div>
+
+          {/* Form wrapper */}
+          <div className="w-full mt-16 sm:mt-20 lg:mt-0 min-w-[300px] sm:min-w-[400px] max-w-[95%] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] mx-auto">
+            <SignupForm />
+          </div>
         </div>
       </div>
     </div>

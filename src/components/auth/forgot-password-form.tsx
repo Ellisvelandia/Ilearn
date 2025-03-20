@@ -2,125 +2,137 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createBrowserClient } from "@supabase/ssr";
+import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, ControllerRenderProps } from "react-hook-form";
+import * as z from "zod";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Icons } from "@/components/ui/icons";
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabase/client";
+
+// Form validation schema
+const forgotPasswordSchema = z.object({
+  email: z.string().email("Invalid email address"),
+});
+
+type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 
 export function ForgotPasswordForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
-  // Initialize Supabase client
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const form = useForm<ForgotPasswordFormValues>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsLoading(true);
-    setError(null);
-    setSuccess(false);
-
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email") as string;
-
+  async function onSubmit(data: ForgotPasswordFormValues) {
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      setIsLoading(true);
+
+      const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
         redirectTo: `${window.location.origin}/auth/reset-password`,
       });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      setSuccess(true);
-    } catch (err: any) {
-      setError(err?.message || "An error occurred while sending the reset link");
+      toast.success("Check your email for the password reset link!");
+      router.push("/auth/login");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong");
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <Card className="w-[95%] min-w-[300px] mx-auto overflow-hidden bg-[#0F0F0F]/80 border-[#1A1A1A]/20 sm:w-[440px] lg:w-full">
-      <CardHeader className="space-y-2.5 pb-3 px-5 sm:px-6 pt-6">
-        <CardTitle className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-300 text-center">Forgot Password</CardTitle>
-        <CardDescription className="text-gray-100 text-center text-sm sm:text-base">
-          Enter your email and we'll send you a reset link
-        </CardDescription>
-      </CardHeader>
-      <form onSubmit={onSubmit}>
-        <CardContent className="space-y-5 px-5 sm:px-6 pt-4">
-          {error && (
-            <Alert variant="destructive" className="bg-red-950/20 border-red-950/10 rounded-lg">
-              <AlertDescription className="text-xs sm:text-sm text-red-400/90">{error}</AlertDescription>
-            </Alert>
-          )}
-          {success && (
-            <Alert className="bg-emerald-950/20 border-emerald-950/10 rounded-lg">
-              <AlertDescription className="text-xs sm:text-sm text-emerald-400/90">
-                Check your email for a link to reset your password. If it doesn&apos;t appear within a few minutes, check your spam folder.
-              </AlertDescription>
-            </Alert>
-          )}
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-xs sm:text-sm font-normal text-gray-400/80">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="name@example.com"
-              required
-              disabled={isLoading || success}
-              className="h-12 bg-[#141414]/80 border-0 text-gray-200/90 text-sm rounded-lg
-                placeholder:text-gray-500
-                focus-visible:ring-1 focus-visible:ring-gray-700/30
-                transition-all duration-200 w-full px-4"
-              autoComplete="email"
-            />
-          </div>
-        </CardContent>
-        <CardFooter className="flex flex-col space-y-4 px-5 sm:px-6 py-6">
-          <Button
-            type="submit"
-            className="w-full h-12 bg-white/95 hover:bg-white text-black/90 text-sm font-medium rounded-lg
-              transition-all duration-200 shadow-sm"
-            disabled={isLoading || success}
-          >
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+    <div className="w-full space-y-6 sm:space-y-8">
+      {/* Background gradient effects */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-full">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent blur-3xl opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-primary/5 blur-2xl" />
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative space-y-2 sm:space-y-4"
+      >
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent text-center">
+          Reset your password
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg text-muted-foreground/80 text-center max-w-[90%] mx-auto">
+          Enter your email address and we'll send you a link to reset your password
+        </p>
+      </motion.div>
+
+      <Form {...form}>
+        <motion.form 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          onSubmit={form.handleSubmit(onSubmit)} 
+          className="relative space-y-4 sm:space-y-6"
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }: { field: ControllerRenderProps<ForgotPasswordFormValues, 'email'> }) => (
+              <FormItem className="space-y-1 sm:space-y-2">
+                <FormLabel className="text-sm sm:text-base text-foreground/90">Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="name@example.com"
+                    type="email"
+                    disabled={isLoading}
+                    className="h-10 sm:h-12 text-sm sm:text-base bg-background/50 backdrop-blur-sm border-primary/20 focus:border-primary/40 focus:ring-primary/20"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs sm:text-sm" />
+              </FormItem>
             )}
-            Send Reset Link
-          </Button>
-          
-          <div className="relative w-full my-2">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-gray-700/30"></span>
-            </div>
-            <div className="relative flex justify-center text-xs">
-              <span className="bg-[#0F0F0F]/80 px-2 text-gray-500">or</span>
-            </div>
-          </div>
-          
-          <Button
-            variant="outline"
-            type="button"
-            className="w-full h-12 bg-[#141414]/50 hover:bg-[#1A1A1A]/50 text-white/80 border-0 text-sm rounded-lg
-              transition-all duration-200"
+          />
+
+          <Button 
+            className="w-full h-10 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-primary via-primary to-primary-foreground shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300" 
+            type="submit" 
             disabled={isLoading}
-            onClick={() => router.push("/auth/login")}
           >
-            Back to Login
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="h-4 w-4 sm:h-5 sm:w-5 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                Sending reset link...
+              </span>
+            ) : (
+              'Send reset link'
+            )}
           </Button>
-        </CardFooter>
-      </form>
-    </Card>
+
+          <p className="text-center text-xs sm:text-sm md:text-base text-muted-foreground/80">
+            Remember your password?{' '}
+            <Link
+              href="/auth/login"
+              className="text-primary hover:text-primary/80 transition-colors font-medium"
+            >
+              Sign in
+            </Link>
+          </p>
+        </motion.form>
+      </Form>
+    </div>
   );
 } 
