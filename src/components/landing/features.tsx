@@ -31,27 +31,30 @@ export function Features() {
   return (
     <section
       id="features"
-      className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
+      className="container space-y-8 sm:space-y-12 lg:space-y-16 bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-transparent md:py-16 lg:py-24"
     >
+      {/* Section Header */}
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-        <h2 className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
+        <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.1]">
           Features
         </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+        <p className="max-w-[85%] sm:max-w-[75%] leading-normal text-muted-foreground text-sm sm:text-base lg:text-lg">
           Everything you need to accelerate your learning journey
         </p>
       </div>
-      <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3 lg:grid-cols-4">
+
+      {/* Features Grid */}
+      <div className="mx-auto grid justify-center gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:max-w-[64rem]">
         {features.map((feature) => (
           <div
             key={feature.name}
-            className="relative overflow-hidden rounded-lg border bg-background p-2"
+            className="relative overflow-hidden rounded-lg border bg-background p-2 transition-all hover:shadow-md"
           >
-            <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-              <feature.icon className="h-12 w-12" />
+            <div className="flex h-[180px] flex-col justify-between rounded-md p-4 sm:p-6">
+              <feature.icon className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-primary" />
               <div className="space-y-2">
-                <h3 className="font-bold">{feature.name}</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold text-base sm:text-lg">{feature.name}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   {feature.description}
                 </p>
               </div>
