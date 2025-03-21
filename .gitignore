@@ -59,3 +59,37 @@ next-env.d.ts
 *credential*
 *token*
 *apikey*
+
+# MCP and confidential files
+*mcp*.json
+*mcp*.config
+*mcp*.js
+*mcp*
+*.mcp
+
+# Sensitive JSON and configuration files
+*config*.json
+*auth*.json
+*credentials*.json
+*private*.json
+*secure*.json
+*sensitive*.json
+
+# Logs that might contain sensitive information
+*.log
+logs/
+error_log*
+
+# Backup and temporary files
+*~
+*.bak
+*.swp
+*.tmp
+.DS_Store
+*.__
+._*
+
+# Local development specific files that might contain secrets
+.vscode/
+.idea/
+*.sublime-*
